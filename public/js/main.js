@@ -867,5 +867,5 @@ var socialIcons = [
   { fa_class: 'fa-free-code-camp', link: 'https://www.freecodecamp.com/jpalmieri'},
   { fa_class: 'fa-linkedin', link: 'https://www.linkedin.com/in/josephpalmieri'},
 ];
-// replaceTemplate($("script#social-icons"), { social_icons: socialIcons });
+replaceTemplate($("script#social-icons"), { social_icons: socialIcons });
 replaceTemplate($("script#social-icons-small"), { social_icons: socialIcons });

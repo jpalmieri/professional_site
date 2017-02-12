@@ -54,32 +54,19 @@
               <a class="btn btn-large bg-puerto-rico text-white btn-circle propClone font-weight-300" href="index.html#portfolios-section7">
                 <span class="tz-text">MY WORK</span>
               </a>
-
-              <div class="position-absolute position-bottom position-left position-right margin-ten-bottom xs-position-inherit xs-margin-ten xs-no-margin-bottom xs-no-margin-lr">
-                <ul class="display-inline no-padding margin-twenty-two-left sm-margin-six-left xs-no-margin-left">
-                  <li class="display-inline padding-four">
-                    <a href="https://github.com/jpalmieri" target="_blank">
-                      <i class="fa fa-github-alt text-dark-gray title-small tz-icon-color"></i>
-                    </a>
-                  </li>
-                  <li class="display-inline padding-four">
-                    <a href="http://stackoverflow.com/users/3376769/jpalmieri" target="_blank">
-                      <i class="fa fa-stack-overflow text-dark-gray title-small tz-icon-color"></i>
-                    </a>
-                  </li>
-                  <li class="display-inline padding-four">
-                    <a href="https://www.freecodecamp.com/jpalmieri" target="_blank">
-                      <i class="fa fa-free-code-camp text-dark-gray title-small tz-icon-color"></i>
-                    </a>
-                  </li>
-                  <li class="display-inline padding-four">
-                    <a href="https://www.linkedin.com/in/josephpalmieri" target="_blank">
-                      <i class="fa fa-linkedin text-dark-gray title-small tz-icon-color"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
+              <script id="social-icons" type="text/x-handlebars-template">
+                <div class="position-absolute position-bottom position-left position-right margin-ten-bottom xs-position-inherit xs-margin-ten xs-no-margin-bottom xs-no-margin-lr">
+                  <ul class="display-inline no-padding margin-twenty-two-left sm-margin-six-left xs-no-margin-left">
+                    {{#each social_icons}}
+                      <li class="display-inline padding-four">
+                        <a href="{{link}}" target="_blank">
+                          <i class="fa {{fa_class}} text-dark-gray title-small tz-icon-color"></i>
+                        </a>
+                      </li>
+                    {{/each}}
+                  </ul>
+                </div>
+              </script>
             </div>
           </div>
           <!-- end slider text -->
