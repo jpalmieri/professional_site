@@ -859,7 +859,7 @@ var skills = [
   { name: "JavaScript", percent: 90, exp: { quantity: 4, unit: 'years'} },
   { name: "Rails", percent: 65, exp: { quantity: 2.5, unit: 'years'} }
 ];
-replaceTemplate($("script#skill-bars"), { skills: skills });
+// replaceTemplate($("script#skill-bars"), { skills: skills });
 
 var socialIcons = [
   { fa_class: 'fa-github-alt', link: 'https://github.com/jpalmieri'},
@@ -867,5 +867,5 @@ var socialIcons = [
   { fa_class: 'fa-free-code-camp', link: 'https://www.freecodecamp.com/jpalmieri'},
   { fa_class: 'fa-linkedin', link: 'https://www.linkedin.com/in/josephpalmieri'},
 ];
-replaceTemplate($("script#social-icons"), { social_icons: socialIcons });
+// replaceTemplate($("script#social-icons"), { social_icons: socialIcons });
 replaceTemplate($("script#social-icons-small"), { social_icons: socialIcons });

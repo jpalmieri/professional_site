@@ -390,24 +390,17 @@
               </div>
             </div>
             <!-- social elements -->
-
-            <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 text-right sm-text-center display-table" style="height: 44px;">
-              <div class="social icon-extra-small display-table-cell-vertical-middle">
-                <a href="index.html#" class="margin-sixteen-right">
-                  <i class="fa fa-github-alt tz-icon-color"></i>
-                </a>
-                <a href="index.html#" class="margin-sixteen-right">
-                  <i class="fa fa-stack-overflow tz-icon-color"></i>
-                </a>
-                <a href="index.html#" class="margin-sixteen-right">
-                  <i class="fa fa-free-code-camp tz-icon-color"></i>
-                </a>
-                <a href="index.html#">
-                  <i class="fa fa-linkedin tz-icon-color"></i>
-                </a>
+            <script id="social-icons-small" type="text/x-handlebars-template">
+              <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12 text-right sm-text-center display-table" style="height: 44px;">
+                <div class="social icon-extra-small display-table-cell-vertical-middle">
+                  {{#each social_icons}}
+                    <a href="{{link}}" {{#unless @last}} class="margin-sixteen-right" {{/unless}}>
+                      <i class="fa {{fa_class}} tz-icon-color"></i>
+                    </a>
+                  {{/each}}
+                </div>
               </div>
-            </div>
-
+            </script>
             <!-- end social elements -->
           </div>
         </div>
