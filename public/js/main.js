@@ -751,7 +751,7 @@ var wow = new WOW({
     boxClass: 'wow',
     animateClass: 'animated',
     offset: 90,
-    mobile: false,
+    mobile: true,
     live: true
 });
 wow.init();
