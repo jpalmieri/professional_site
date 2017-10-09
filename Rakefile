@@ -16,6 +16,8 @@ namespace :static do
     Dir.mkdir 'public' unless File.exist? 'public'
     Dir.chdir 'public' do
       `wget -mnH http://localhost:3000/`
+      `wget -mnH http://localhost:3000/.well-known/acme-challenge/dAHcqu8kzPqLcef-jqxJXekSD_3Ag0_fMKvrQRdl6M4`
+      `wget -mnH http://localhost:3000/.well-known/acme-challenge/X0_EsCxMiaVaHvU0OGzjQxcopUcNcawP4CttCPwYrHo`
     end
     `rsync -ruv public/`
   end
