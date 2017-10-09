@@ -17,6 +17,6 @@ namespace :static do
     Dir.chdir 'public' do
       `wget -mnH http://localhost:3000/`
     end
-    `rsync -ruv --exclude=.svn/ public_site/`
+    `rsync -ruv --exclude=.svn/ public/`
   end
 end
