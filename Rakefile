@@ -17,6 +17,14 @@ namespace :static do
     Dir.chdir 'public' do
       `wget -mnH http://localhost:3000/`
     end
-    `rsync -ruv --exclude=.svn/ public/`
+    `rsync -ruv public/`
+  end
+
+  desc 'Run tiny HTTP server from ./public/ directory'
+  task :server do
+    Dir.chdir 'public' do
+      puts 'Started HTTP server at http://localhost:8000/. Press CTRL+C to exit.'
+      `python -m SimpleHTTPServer`
+    end
   end
 end
