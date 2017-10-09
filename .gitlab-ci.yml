@@ -1,9 +1,11 @@
-image: alpine:latest
+image: ripsawridge/ruby-rsync:latest
 
 pages:
   stage: deploy
   script:
-  - echo 'Nothing to do...'
+  - bundle install
+  - bundle exec rails s --daemon
+  - bundle exec rake static:generate
   artifacts:
     paths:
     - public
