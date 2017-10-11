@@ -1,13 +1,30 @@
 image: ripsawridge/ruby-rsync:latest
 
-pages:
-  stage: deploy
+build:
+  stage: build
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    paths:
+    - public
+    policy: push
   script:
   - bundle install
   - bundle exec rails server -e static --daemon
   - bundle exec rake static:generate
+
+pages:
+  stage: deploy
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    paths:
+    - public
+  environment:
+    name: static
+    url: https://www.jpalmieri.com
+  script: echo "deploying site to pages..."
   artifacts:
     paths:
     - public
+  when: manual
   only:
   - master
