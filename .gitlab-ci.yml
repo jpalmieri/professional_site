@@ -4,7 +4,6 @@ pages:
   stage: deploy
   script:
   - bundle install
-  - echo $SECRETS_YML_KEY >> config/secrets.yml.key
   - bundle exec rails server -e static --daemon
   - bundle exec rake static:generate
   artifacts:
