@@ -1,0 +1,12 @@
+// Add any new stylesheets to this stylesheet as an import
+// This preserves the variables, mixins, etc. so they won't have to be
+// imported into each sheet in which they are used.
+
+@import 'base/_colors';
+@import 'base/_fonts';
+@import 'base/_margins';
+
+@import 'shared/_stars';
+
+@import 'styles/layout';
+@import 'styles/welcome';

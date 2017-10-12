@@ -3,6 +3,7 @@
   <head>
     <title>Joe Palmieri</title>
     <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -18,6 +19,25 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class='container'>
+      <div id="scene" data-pointer-events='true'>
+        <h1 style="margin:0;">joe palmieri</h1>
+        <h6 style="text-align:center;margin:0;">The information you seek lies elsewhere, intrepid traveler:</h6>
+
+        <%= render 'shared/stars' %>
+
+        <div class="back-layer link-layer layer" data-depth="0.80"></div>
+        <div class="middle-layer link-layer layer" data-depth="0.90"></div>
+        <div class="front-layer link-layer layer" data-depth="1.0"></div>
+
+        <div data-pjax-container>
+          <% if flash[:error] %>
+            <h3 class='flash error'>Error: <%= flash[:error] %></h3>
+          <% end %>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
