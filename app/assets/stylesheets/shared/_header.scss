@@ -1,0 +1,41 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  .header-inner {
+    margin: $desktopVerticalMargin;
+    .logo {
+      font-size: 100vh;
+      transition: font-size 3s ease-out;
+      white-space: nowrap;
+      margin-left: 10px;
+      h1 {
+        margin: 0;
+        letter-spacing: 0;
+        text-align: left;
+        font-family: "Nunito Sans";
+      }
+    }
+    .tagline {
+      margin-left: 10px;
+    }
+  }
+}
+
+@media (max-width: $tabletWidth) {
+  .header {
+    .header-inner {
+      margin: $tabletVerticalMargin;
+    }
+  }
+}
+
+@media (max-width: $mobileWidth) {
+  .header {
+    .header-inner {
+      margin: $mobileVerticalMargin;
+    }
+  }
+}
