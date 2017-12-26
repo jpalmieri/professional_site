@@ -32,8 +32,10 @@ A daemonized rails server is started, the served files are copied to `public/` (
 
 ## Testing
 
-Not yet. Have you seen the site?
+Locally:
+```
+bundle exec rspec
+```
 
-...ok, fine. I'll add some tests...soonish. Promise.
-
+Additionally, pushing to GitLab will trigger the CI, which will run the `rspec` job as well (using GitLab's runners). See `.gitlab-ci.yml` for details.
 ---

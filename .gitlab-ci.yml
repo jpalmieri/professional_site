@@ -1,5 +1,31 @@
 image: ripsawridge/ruby-rsync:latest
 
+services:
+  - postgres:latest
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  # Configure postgres service (https://hub.docker.com/_/postgres/)
+  POSTGRES_DB: test_db
+  POSTGRES_USER: runner
+  POSTGRES_PASSWORD: ""
+
+.setup_test_env: &setup_test_env
+  cache:
+    untracked: true
+    key: test
+    paths:
+      - vendor/bundler
+  before_script:
+    - bundle install --path=vendor/bundler --without production
+    - cp config/database.yml.gitlab config/database.yml
+    - apt-get update -qq && apt-get install -y -qq postgresql postgresql-contrib libpq-dev cmake
+    - RAILS_ENV=test bundle exec rake db:migrate
+
 build:
   stage: build
   cache:
@@ -11,6 +37,14 @@ build:
   - bundle install
   - bundle exec rails server -e static --daemon
   - bundle exec rake static:generate
+
+rspec:
+  <<: *setup_test_env
+  stage: test
+  environment:
+    name: test
+  script:
+    - RAILS_ENV=test bundle exec rspec
 
 pages:
   stage: deploy
