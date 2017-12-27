@@ -1,6 +1,42 @@
 image: ripsawridge/ruby-rsync:latest
 
+stages:
+  - test
+  - build
+  - deploy
+
+variables:
+  POSTGRES_DB: test_db
+  POSTGRES_USER: runner
+  POSTGRES_PASSWORD: ""
+
+.setup_postgres: &setup_postgres
+  services:
+    - postgres:latest
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq postgresql postgresql-contrib libpq-dev cmake
+
+.setup_test_env: &setup_test_env
+  <<: *setup_postgres
+  cache:
+    untracked: true
+    key: test
+    paths:
+      - vendor/bundler
+  before_script:
+    - bundle install --path=vendor/bundler --without production
+    - RAILS_ENV=test bundle exec rake db:migrate
+
+rspec:
+  <<: *setup_test_env
+  stage: test
+  environment:
+    name: test
+  script:
+    - RAILS_ENV=test bundle exec rspec
+
 build:
+  <<: *setup_postgres
   stage: build
   cache:
     key: "$CI_COMMIT_REF_NAME"
@@ -18,6 +54,7 @@ pages:
     key: "$CI_COMMIT_REF_NAME"
     paths:
     - public
+    policy: pull
   environment:
     name: static
     url: https://www.jpalmieri.com
