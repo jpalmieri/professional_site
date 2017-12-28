@@ -19,11 +19,8 @@ variables:
 .setup_test_env: &setup_test_env
   <<: *setup_postgres
   before_script:
-    - RAILS_ENV=test bundle exec rake db:migrate
-
-.install_gems: &install_gems
-  before_script:
     - bundle install --path=vendor/bundler
+    - RAILS_ENV=test bundle exec rake db:migrate
 
 cache:
   untracked: true
@@ -34,7 +31,6 @@ cache:
 
 rspec:
   <<: *setup_test_env
-  <<: *install_gems
   stage: test
   environment:
     name: test
@@ -43,9 +39,9 @@ rspec:
 
 build:
   <<: *setup_postgres
-  <<: *install_gems
   stage: build
   script:
+  - bundle install --path=vendor/bundler
   - bundle exec rails server -e static --daemon
   - bundle exec rake static:generate
 
