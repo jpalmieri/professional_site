@@ -19,6 +19,7 @@ variables:
 .setup_test_env: &setup_test_env
   <<: *setup_postgres
   before_script:
+    - cp config/database.gitlab.yml config/database.yml
     - bundle install --path=vendor/bundler
     - RAILS_ENV=test bundle exec rake db:migrate
 
