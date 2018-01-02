@@ -1,4 +1,3 @@
-require File.expand_path('../development', __FILE__)
 # environment for serving static pages
 Jpalmieri::Application.configure do
 
