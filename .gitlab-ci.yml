@@ -10,19 +10,6 @@ variables:
   POSTGRES_USER: runner
   POSTGRES_PASSWORD: ""
 
-.setup_postgres: &setup_postgres
-  services:
-    - postgres:latest
-  before_script:
-    - apt-get update -qq && apt-get install -y -qq postgresql libpq-dev cmake
-
-.setup_test_env: &setup_test_env
-  <<: *setup_postgres
-  before_script:
-    - cp config/database.gitlab.yml config/database.yml
-    - bundle install --path=vendor/bundler
-    - RAILS_ENV=test bundle exec rake db:migrate
-
 cache:
   untracked: true
   key: "$CI_COMMIT_REF_NAME"
@@ -31,18 +18,24 @@ cache:
    - public
 
 rspec:
-  <<: *setup_test_env
   stage: test
   environment:
     name: test
+  services:
+    - postgres:latest
   script:
+    # use postgres service db config for ci testing
+    - cp config/database.gitlab.yml config/database.yml
+    - bundle install --path=vendor/bundler --without development
+    - RAILS_ENV=test bundle exec rake db:migrate
     - RAILS_ENV=test bundle exec rspec
 
 build:
-  <<: *setup_postgres
   stage: build
+  services:
+    - postgres:latest
   script:
-  - bundle install --path=vendor/bundler
+  - bundle install --path=vendor/bundler --without development test
   - bundle exec rails server -e static --daemon
   - bundle exec rake static:generate
 
