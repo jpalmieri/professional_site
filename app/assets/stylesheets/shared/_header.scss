@@ -7,8 +7,7 @@
   .header-inner {
     margin: $desktopVerticalMargin;
     .logo {
-      font-size: 100vh;
-      transition: font-size 3s ease-out;
+      font-size: initial;
       white-space: nowrap;
       margin-left: 10px;
       h1 {
