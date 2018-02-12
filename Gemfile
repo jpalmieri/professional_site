@@ -35,6 +35,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails', '~> 4.0'
 gem 'rack-pjax', '~> 1.0'
 gem 'underscore-rails', '~> 1.8'
+gem 'pace-rails', '~> 0.1'
 
 # css libraries/stylesheets
 gem 'normalize-rails', '~> 4.0'

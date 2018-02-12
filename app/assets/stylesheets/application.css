@@ -12,6 +12,7 @@
  *
  *= require normalize-rails
  *= require font-awesome
+ *= require pace/white/pace-theme-flash
  *= require main
  *= require_self
  */

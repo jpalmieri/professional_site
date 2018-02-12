@@ -12,6 +12,7 @@
 //
 //= require jquery3
 //= require jquery_ujs
+//= require pace/pace
 //= require jquery.pjax
 //= require underscore
 //= require rails-ujs
