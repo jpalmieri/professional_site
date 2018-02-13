@@ -1,8 +1,8 @@
 image: ripsawridge/ruby-rsync:latest
 
 stages:
-  - test
   - build
+  - test
   - deploy
 
 variables:
@@ -10,17 +10,24 @@ variables:
   POSTGRES_USER: runner
   POSTGRES_PASSWORD: ""
 
-cache:
-  untracked: true
-  key: "$CI_COMMIT_REF_NAME"
-  paths:
-   - vendor/bundler
-   - public
+bundle:
+  stage: build
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    paths:
+      - vendor/bundler
+  artifacts:
+    paths:
+      - vendor/bundler
+  script:
+    - bundle install --path=vendor/bundler --without development
 
 rspec:
   stage: test
   environment:
     name: test
+  dependencies:
+    - bundle
   services:
     - postgres:latest
   script:
@@ -30,8 +37,15 @@ rspec:
     - RAILS_ENV=test bundle exec rake db:migrate
     - RAILS_ENV=test bundle exec rspec
 
-build:
-  stage: build
+# Generates static site for GitLab pages
+# In test group to make sure that generation step succeeds before actual deploy
+pages:generate:
+  stage: test
+  dependencies:
+    - bundle
+  artifacts:
+    paths:
+      - public
   services:
     - postgres:latest
   script:
@@ -39,19 +53,16 @@ build:
   - bundle exec rails server -e static --daemon
   - bundle exec rake static:generate
 
-pages:
+pages:deploy:
   stage: deploy
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
+  only:
+    - master
+  dependencies:
+    - pages:generate
+  artifacts:
     paths:
-    - public
-    policy: pull
+      - public
   environment:
     name: static
     url: https://www.jpalmieri.com
   script: echo "deploying site to pages..."
-  artifacts:
-    paths:
-    - public
-  only:
-  - master
