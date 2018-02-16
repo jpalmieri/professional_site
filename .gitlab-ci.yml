@@ -13,7 +13,7 @@ variables:
 bundle:
   stage: build
   cache:
-    key: "$CI_COMMIT_REF_NAME"
+    key: "${CI_COMMIT_REF_NAME}"
     paths:
       - vendor/bundler
   artifacts:
