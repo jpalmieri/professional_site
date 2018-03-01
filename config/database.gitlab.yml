@@ -1,0 +1,11 @@
+# Test DB configuration for GitLab's CI, since it uses Postgres as a service
+# see .gitlab-ci for how this file is used
+test:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  host: postgres
+  username: runner
+  password: ""
+  database: test_db
