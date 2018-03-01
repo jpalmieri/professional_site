@@ -5,20 +5,35 @@
 
 ---
 
-My website. Uses GitLab Pages to generate and host the static site.
+My website. Uses [Hugo](https://gohugo.io/) to generate and GitLab Pages host the static site.
 
 Learn more about GitLab Pages at https://pages.gitlab.io and the official
 documentation http://doc.gitlab.com/ee/pages/README.html.
 
 ## Setup
 
+Install [Hugo](https://gohugo.io/), if not already installed.
+For macOS with [Homebrew](https://brew.sh/):
+
+```.sh
+brew install hugo
 ```
+
+For other platforms, see Hugo's
+[install documentation](https://gohugo.io/getting-started/installing).
+
+Clone the repo:
+```.sh
 git clone https://gitlab.com/jpalmieri/jpalmieri.gitlab.io/
-cd jpalmieri.gitlab.io/
-bundle install
-bundle exec rails server
 ```
-http://localhost:3000 👀
+
+Start the server:
+
+```.sh
+cd jpalmieri.gitlab.io/
+hugo server -D # the -D flag will also serve files marked as "draft"
+```
+http://localhost:1313 👀
 
 ## Deploying
 
@@ -28,14 +43,6 @@ https://gitlab.com/jpalmieri/jpalmieri.gitlab.io/blob/master/.gitlab-ci.yml
 
 Here's what happens in that file:
 
-A daemonized rails server is started, the served files are copied to `public/` (using `rsync`) and then GitLab's CI deploys static files in the `public/` folder as a GitLab Pages site at https://jpalmieri.gitlab.io.
+Hugo will generate the site's files into `./public` and GitLab's CI will then deploy these files as a GitLab Pages site at https://jpalmieri.gitlab.io.
 
-## Testing
-
-Locally:
-```
-bundle exec rspec
-```
-
-Additionally, pushing to GitLab will trigger the CI, which will run the `rspec` job as well (using GitLab's runners). See `.gitlab-ci.yml` for details.
 ---
