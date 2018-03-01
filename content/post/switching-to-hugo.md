@@ -10,7 +10,7 @@ images = [
 ] # overrides the site-wide open graph image
 +++
 
-I decided to from Ruby-based static site generation to [Hugo](https://gohugo.io/).
+I decided to switch from Ruby-based static site generation to [Hugo](https://gohugo.io/).
 
 # A little background
 
