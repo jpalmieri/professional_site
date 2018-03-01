@@ -1,68 +1,17 @@
-image: ripsawridge/ruby-rsync:latest
+# All available Hugo versions are listed here: https://gitlab.com/pages/hugo/container_registry
+image: registry.gitlab.com/pages/hugo:latest
 
-stages:
-  - build
-  - test
-  - deploy
-
-variables:
-  POSTGRES_DB: test_db
-  POSTGRES_USER: runner
-  POSTGRES_PASSWORD: ""
-
-bundle:
-  stage: build
-  cache:
-    key: "${CI_COMMIT_REF_NAME}"
-    paths:
-      - vendor/bundler
-  artifacts:
-    paths:
-      - vendor/bundler
+test:
   script:
-    - bundle install --path=vendor/bundler --without development
-
-rspec:
-  stage: test
-  environment:
-    name: test
-  dependencies:
-    - bundle
-  services:
-    - postgres:latest
-  script:
-    # use postgres service db config for ci testing
-    - cp config/database.gitlab.yml config/database.yml
-    - bundle install --path=vendor/bundler --without development
-    - RAILS_ENV=test bundle exec rake db:migrate
-    - RAILS_ENV=test bundle exec rspec
-
-# Generates static site for GitLab pages
-# In test group to make sure that generation step succeeds before actual deploy
-pages:generate:
-  stage: test
-  dependencies:
-    - bundle
-  artifacts:
-    paths:
-      - public
-  services:
-    - postgres:latest
-  script:
-  - bundle install --path=vendor/bundler --without development test
-  - bundle exec rails server -e static --daemon
-  - bundle exec rake static:generate
+  - hugo
+  except:
+  - master
 
 pages:
-  stage: deploy
-  only:
-    - master
-  dependencies:
-    - pages:generate
+  script:
+  - hugo
   artifacts:
     paths:
-      - public
-  environment:
-    name: static
-    url: https://www.jpalmieri.com
-  script: echo "deploying site to pages..."
+    - public
+  only:
+  - master
