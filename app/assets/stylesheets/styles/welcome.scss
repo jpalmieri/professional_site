@@ -1,0 +1,26 @@
+.welcome {
+  .constellation-index {
+    display: none;
+  }
+}
+
+#github {
+  @extend .constellation-link.row-12 ;
+  @extend .constellation-link.right-col-4 ;
+}
+#gitlab {
+  @extend .constellation-link.row-6 ;
+  @extend .constellation-link.right-col-5 ;
+}
+#linkedin {
+  @extend .constellation-link.row-9 ;
+  @extend .constellation-link.left-col-6 ;
+}
+#stack-overflow {
+  @extend .constellation-link.row-3 ;
+  @extend .constellation-link.left-col-2 ;
+}
+#resume {
+  @extend .constellation-link.row-14 ;
+  @extend .constellation-link.left-col-3 ;
+}
