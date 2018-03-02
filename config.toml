@@ -11,6 +11,11 @@ disqusShortname = "" # Optional, add Disqus shortname for comments
 SectionPagesMenu = "main" # Enable menu system for lazy bloggers
 footnoteReturnLinkContents = "↩" # Provides a nicer footnote return link
 
+# Highlight code fenced blocks, but only with language, e.g., ```.go
+# fenced code blocks without language (e.g, ```) will not be highlighted
+pygmentsCodeFences = true
+pygmentsOptions = "linenos=true" # add line numbers to highlighted blocks
+
 [[menu.main]]
   name = "Home"
   weight = 1
