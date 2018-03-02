@@ -63,13 +63,13 @@ I fire up the server per the documentation with `hugo server -D` (I later find t
 
 Hey, this `hugo new` command sounds like `rails generate`. What's the sytax?
 
-```
+```.sh
 hugo new <content-section>/<file-name.md>
 ```
 
 Let's give it a shot:
 
-```
+```.sh
 hugo new post/something-else.md
 # => ./content/post/something-else.md created
 ```
@@ -112,7 +112,7 @@ Per the After Dark [docs](https://comfusion.github.io/after-dark/#section-menu),
 
 I want a page with a simple blurb about who I am and what I do, yadda yadda, so let's use our old friend `hugo new` and generate one from the `default.md` archetype:
 
-```
+```.sh
 hugo new about.md
 # => ./content/about.md created
 ```
@@ -193,7 +193,7 @@ flying-toasters
 
 Although I haven't yet made myself familiar with the templating syntax, `list.html` seems to be the one that's being used:
 
-```
+```.go
 {{ define "header" }}
   {{ partial "menu.html" . }}
 {{ end }}
@@ -213,7 +213,7 @@ Although I haven't yet made myself familiar with the templating syntax, `list.ht
 
 That would make sense, since an index file would be expected to list the items in the directory, and there are no other items for it to list. It looks like I want to use `single.html` instead, since it includes `{{ .Content }}`:
 
-```
+```.go
 {{ define "title" -}}
   {{ .Title }} | {{ .Site.Title }}
 {{- end }}
@@ -265,7 +265,7 @@ However, one thing would make this page better. It's a pretty long page (it's my
 
 The post template is located at `./themes/after-dark/layouts/post/single.md` It looks like the [docs](https://gohugo.io/content-management/organization/#type) say that, to get the nested template, we'll need to change the `type` to `"post"` and use the `"single"` layout:
 
-```
+```.toml
 +++
 title = "Bio"
 date = 2018-02-28T19:09:41-08:00
@@ -277,7 +277,7 @@ layout = "single"
 
 Ok, that seemed to work. One added bonus of using the **Post** template is that we can now use the [Table of Contents](https://comfusion.github.io/after-dark/#table-of-contents) feature that After Dark made. This will create a collapsable menu based on all of the section headings in the markdown (e.g., `# First Chapter`) when it's enabled. Since I mentioned that I have a long bio, this will work nicely.
 
-```
+```.toml
 +++
 title = "Bio"
 date = 2018-02-28T19:09:41-08:00
