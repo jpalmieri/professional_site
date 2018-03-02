@@ -40,7 +40,7 @@ The install script tells me I now have a site installed at `./flying-toasters` (
 
 ```
 flying-toasters
-  └──archetypes
+  ├──archetypes
   |   ├──default.md
   |   └──post.md
   ├──content
@@ -49,7 +49,7 @@ flying-toasters
   ├──data
   ├──layouts
   ├──static
-  └──themes
+  ├──themes
   |   └──after-dark
   |       └──...
   └──config.toml
@@ -166,7 +166,7 @@ It looks like I jumped the gun by using generating the **About** page with `hugo
 flying-toasters
   ...
   ├──content
-  |   └──post
+  |   ├──post
   |   |   └──starry-night.md
   |   └──about
   |       └──_index.md
@@ -186,7 +186,7 @@ flying-toasters
         └──layouts
             └──_default
                 ...
-                └──list.html
+                ├──list.html
                 └──single.html
                 ...
 ```
