@@ -1,0 +1,26 @@
+form input, button, textarea {
+  font-size: 1rem;
+  font-family: Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+}
+
+/* Style inputs with type="text", select elements and textareas */
+input[type=text], input[type=email], textarea {
+  width: 100%; /* Full width */
+  padding: 0.5rem; /* Some padding */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 0.5rem; /* Add a top margin */
+}
+
+/* Style the submit button with a specific background color etc */
+button[type=submit] {
+  background-color: #ff2e88;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+/* When moving the mouse over the submit button, add a darker green color */
+button[type=submit]:hover {
+  background-color: #45a049;
+}
