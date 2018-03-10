@@ -27,7 +27,7 @@ If you're really curious, you can read my extended [bio](/about/bio).
     <label for="message">Message:</label>
     <textarea name="message" size="40" rows="5"></textarea>
   </p>
-
+  <div netlify-recaptcha></div>
   <p>
     <button type="submit">submit</button>
   </p>
