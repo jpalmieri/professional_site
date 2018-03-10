@@ -34,7 +34,7 @@ If you're really curious, you can read my extended [bio](/about/bio).
 </form>
 
 
-<form name="contactForm" netlify-honeypot="bot-field" action="/thanks.html" netlify>
+<form name="contactForm" netlify-honeypot="bot-field" action="/about/thanks.html" netlify>
   <p style="display:none;">
     <label>Don’t fill this out: <input name="bot-field"></label>
   </p>
