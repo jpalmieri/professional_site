@@ -17,25 +17,4 @@ If you're really curious, you can read my extended [bio](/about/bio).
 
 # Drop me a line
 
-<form name="contactForm" action="/about/thanks.html" netlify>
-  <p>
-    <label for="email">Your email:</label>
-    <input type="email" name="email" size="40">
-  </p>
-
-  <p>
-    <label for="message">Message:</label>
-    <textarea name="message" size="40" rows="5"></textarea>
-  </p>
-  <div netlify-recaptcha></div>
-  <p>
-    <button type="submit">submit</button>
-  </p>
-</form>
-
-
-<form name="contactForm" netlify-honeypot="bot-field" action="/about/thanks.html" netlify>
-  <p style="display:none;">
-    <label>Don’t fill this out: <input name="bot-field"></label>
-  </p>
-</form>
+{{< contact-form form-name="contactForm" >}}

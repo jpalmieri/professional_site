@@ -1,0 +1,91 @@
+<!--{{/*
+A contact form for use with Netlify. Adds netlify attribute and captcha,
+as well as a honeypot to filter submissions from bots.
+
+Submits form via ajax and replaces form with confirmation message.
+
+Usage: {{< contactForm form-name="myForm" >}}
+*/}}-->
+
+{{ $name := .Get "form-name" }}
+
+<!-- form styles -->
+<style>
+  form[name="{{ $name }}"] input,
+  form[name="{{ $name }}"] button,
+  form[name="{{ $name }}"] textarea {
+    font-size: 1rem;
+    font-family: Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+  }
+
+  /* Style inputs with type="text", select elements and textareas */
+  form[name="{{ $name }}"] input[type=text],
+  form[name="{{ $name }}"] input[type=email],
+  form[name="{{ $name }}"] textarea {
+    width: 100%; /* Full width */
+    padding: 0.5rem; /* Some padding */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 0.5rem; /* Add a top margin */
+  }
+
+  /* Style the submit button with a specific background color etc */
+  form[name="{{ $name }}"] button[type=submit] {
+    background-color: #ff2e88;
+    color: #fff;
+    padding: 0.75rem 1rem;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* When moving the mouse over the submit button, add a darker green color */
+  form[name="{{ $name }}"] button[type=submit]:hover {
+    background-color: #45a049;
+  }
+</style>
+
+<!-- form html -->
+<form name="{{ $name }}" action="/" netlify>
+  <p>
+    <label for="email">Your email:</label>
+    <input type="email" name="email" size="40" required>
+  </p>
+
+  <p>
+    <label for="message">Message:</label>
+    <textarea name="message" size="40" rows="5" required minlength="10"></textarea>
+  </p>
+  <div netlify-recaptcha></div>
+  <p>
+    <button type="submit">submit</button>
+  </p>
+</form>
+
+<!-- honeypot form to attract bots to submit
+  any submissions with this field completed will be discarded by netlify -->
+<form name="{{ $name }}" netlify-honeypot="bot-field" action="/" netlify>
+  <p style="display:none;">
+    <label>Don’t fill this out: <input name="bot-field"></label>
+  </p>
+</form>
+
+<!-- Add jQuery for form submission -->
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous">
+</script>
+
+<!-- Submit form and replace with confirmation message -->
+<script>
+  $('form[name="{{ $name }}"]').submit(function(e) {
+    e.preventDefault();
+    var $form = $(this);
+
+    $.post($form.attr("action"), $form.serialize()).then(function() {
+      $form.fadeOut(function() {
+        $form.html("<p>Message received. Thanks!</p>");
+        $form.fadeIn();
+      });
+    });
+  });
+</script>
